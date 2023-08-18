@@ -1,6 +1,3 @@
--- nvim-hardline
--- By Olivier Roques
--- github.com/ojroques
 
 -------------------- VARIABLES -----------------------------
 local common = require('hardline.common')
@@ -12,13 +9,16 @@ M.options = {
   theme = 'default',
   sections = {
     {class = 'mode', item = require('hardline.parts.mode').get_item},
-    {class = 'med', item = require('hardline.parts.filename').get_item},
-    '%<',
-    {class = 'med', item = '%='},
-    {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
     {class = 'error', item = require('hardline.parts.lsp').get_error},
     {class = 'warning', item = require('hardline.parts.lsp').get_warning},
     {class = 'warning', item = require('hardline.parts.whitespace').get_item},
+    {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
+    {class = 'med', item = require('hardline.parts.filename').get_item},
+    -- this is to separate from left and right but afects the colors
+    -- left side
+    -- '%<',
+    -- right side
+    -- {class = 'med', item = '%='},
   },
 }
 
