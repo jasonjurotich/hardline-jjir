@@ -14,9 +14,9 @@ local colors = {
 
 local inactive = {
   guifg = colors.grey_comment.gui,
-  guibg = colors.grey_cursor.gui,
+  guibg = "NONE",
   ctermfg = colors.grey_comment.cterm,
-  ctermbg = colors.grey_cursor.cterm,
+  ctermbg = "NONE",
 }
 
 return {
@@ -56,27 +56,27 @@ return {
   low = {
     active = {
       guifg = colors.white.gui,
-      guibg = colors.grey_cursor.gui,
+      guibg = "NONE",
       ctermfg = colors.white.cterm,
-      ctermbg = colors.grey_cursor.cterm,
+      ctermbg = "NONE",
     },
     inactive = inactive,
   },
   med = {
     active = {
       guifg = colors.yellow.gui,
-      guibg = colors.grey_cursor.gui,
+      guibg = "NONE",
       ctermfg = colors.yellow.cterm,
-      ctermbg = colors.grey_cursor.cterm,
+      ctermbg = "NONE",
     },
     inactive = inactive,
   },
   high = {
     active = {
       guifg = colors.white.gui,
-      guibg = colors.grey_menu.gui,
+      guibg = "NONE",
       ctermfg = colors.white.cterm,
-      ctermbg = colors.grey_menu.cterm,
+      ctermbg = "NONE",
     },
     inactive = inactive,
   },
@@ -97,32 +97,5 @@ return {
       ctermbg = colors.yellow.cterm,
     },
     inactive = inactive,
-  },
-  bufferline = {
-    separator = inactive,
-    current = {
-      guifg = colors.black.gui,
-      guibg = colors.green.gui,
-      ctermfg = colors.black.cterm,
-      ctermbg = colors.green.cterm,
-    },
-    current_modified = {
-      guifg = colors.black.gui,
-      guibg = colors.blue.gui,
-      ctermfg = colors.black.cterm,
-      ctermbg = colors.blue.cterm,
-    },
-    background = {
-      guifg = colors.green.gui,
-      guibg = colors.black.gui,
-      ctermfg = colors.green.cterm,
-      ctermbg = colors.black.cterm,
-    },
-    background_modified = {
-      guifg = colors.blue.gui,
-      guibg = colors.black.gui,
-      ctermfg = colors.blue.cterm,
-      ctermbg = colors.black.cterm,
-    },
   },
 }
