@@ -74,18 +74,18 @@ M.set = function(color_table)
     error = {
       active = {
         guifg = color_table.text.gui,
-        guibg = color_table.command.gui,
+        guibg = "NONE",
         ctermfg = color_table.text.cterm,
-        ctermbg = color_table.command.cterm,
+        ctermbg = "NONE",
       },
       inactive = inactive,
     },
     warning = {
       active = {
         guifg = color_table.text.gui,
-        guibg = color_table.warning.gui,
+        guibg = "NONE",
         ctermfg = color_table.text.cterm,
-        ctermbg = color_table.warning.cterm,
+        ctermbg = "NONE",
       },
       inactive = inactive,
     },
