@@ -4,30 +4,26 @@
 
 -------------------- VARIABLES -----------------------------
 local common = require('hardline.common')
-local bufferline = require('hardline.bufferline')
 local custom_colors = require('hardline.themes.custom_colors')
 local fmt = string.format
 local M = {}
 
 -------------------- OPTIONS -------------------------------
 M.options = {
-  bufferline = false,
-  bufferline_settings = {
-      exclude_terminal = false,
-      show_index = false,
-      separator = '|',
-  },
   theme = 'default',
   sections = {
     {class = 'mode', item = require('hardline.parts.mode').get_item},
-    {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
     {class = 'med', item = require('hardline.parts.filename').get_item},
+
+    {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
+
     '%<',
     {class = 'med', item = '%='},
     {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
     {class = 'error', item = require('hardline.parts.lsp').get_error},
     {class = 'warning', item = require('hardline.parts.lsp').get_warning},
     {class = 'warning', item = require('hardline.parts.whitespace').get_item},
+
     {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 60},
     {class = 'mode', item = require('hardline.parts.line').get_item},
   },
@@ -47,15 +43,6 @@ M.options = {
 }
 
 -------------------- SECTION MANAGEMENT --------------------
--- Merge sections with same 'class' attribute and add spacing. For instance this:
--- {class = 'low', item = 'first'},
--- {class = 'med', item = 'second'},
--- {class = 'med', item = 'third'},
--- {class = 'high', item = 'fourth'},
--- will become this:
--- {class = 'low', item = ' first '},
--- {class = 'med', item = ' second third '},
--- {class = 'high', item = ' fourth '},
 local function aggregate_sections(sections)
   local aggregated, piv = {}, 1
   while piv <= #sections do
@@ -125,16 +112,6 @@ local function get_section_state(section, is_active)
       return mode.state
     end
   end
-  if section.class == 'bufferline' then
-    if section.separator then
-      return 'separator'
-    end
-    local state = section.current and 'current' or 'background'
-    if section.modified then
-      state = fmt('%s_modified', state)
-    end
-    return state
-  end
   return is_active and 'active' or 'inactive'
 end
 
@@ -165,20 +142,6 @@ function M.update_statusline(is_active)
   sections = aggregate_sections(sections)
   sections = highlight_sections(sections, is_active)
   return table.concat(sections)
-end
-
--------------------- BUFFERLINE ----------------------------
-function M.update_bufferline()
-  local sections = {}
-  local settings = M.options.bufferline_settings
-  local buffers = bufferline.get_buffers(settings)
-  for i, buffer in ipairs(buffers) do
-    table.insert(sections, bufferline.to_section(buffer, i, settings))
-    if i < #buffers then
-      table.insert(sections, M.options.bufferline_settings.separator)
-    end
-  end
-  return table.concat(highlight_sections(sections))
 end
 
 -------------------- SETUP -----------------------------
@@ -220,11 +183,6 @@ local function set_statusline()
   ]])
 end
 
-local function set_bufferline()
-  vim.opt.showtabline = 2
-  vim.opt.tabline = [[%!luaeval('require("hardline").update_bufferline()')]]
-end
-
 function M.setup(user_options)
   if user_options then
     M.options = vim.tbl_extend('force', M.options, user_options)
@@ -232,9 +190,6 @@ function M.setup(user_options)
   set_theme()
   set_hlgroups()
   set_statusline()
-  if M.options.bufferline then
-    set_bufferline()
-  end
 end
 
 ------------------------------------------------------------
