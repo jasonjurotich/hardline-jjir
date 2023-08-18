@@ -82,19 +82,19 @@ return {
   },
   error = {
     active = {
-      guifg = colors.black.gui,
-      guibg = colors.red.gui,
-      ctermfg = colors.black.cterm,
-      ctermbg = colors.red.cterm,
+      guifg = colors.red.gui,
+      guibg = "NONE",
+      ctermfg = colors.red.cterm,
+      ctermbg = "NONE",
     },
     inactive = inactive,
   },
   warning = {
     active = {
-      guifg = colors.black.gui,
-      guibg = colors.yellow.gui,
-      ctermfg = colors.black.cterm,
-      ctermbg = colors.yellow.cterm,
+      guifg = colors.yellow.gui,
+      guibg = "NONE",
+      ctermfg = colors.yellow.cterm,
+      ctermbg = "NONE",
     },
     inactive = inactive,
   },
